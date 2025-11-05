@@ -1,7 +1,23 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="PanelNames extends string">
 import { computed } from "vue";
 
-const { config } = defineProps<{ config: any[] }>();
+const { config } = defineProps<{
+  config: readonly {
+    id: PanelNames;
+    gridAttributes: {
+      width: number;
+      height: number;
+      xPos: number;
+      yPos: number;
+    };
+  }[];
+}>();
+
+type PanelSlotNames = `panel(${PanelNames})`;
+
+defineSlots<{
+  [key in PanelSlotNames]: () => unknown;
+}>();
 
 const gridColumns = computed(() => {
   const maxWidth = Math.max(

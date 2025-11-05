@@ -58,7 +58,7 @@ const dashboardConfig = [
       xPos: 1,
     },
   },
-];
+] as const;
 
 watch(mode, updateTarget);
 watch(limit, updateTarget);
